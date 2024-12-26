@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassVault - Your Personal Password Manager</title>
+
+    <!-- Bootstrap CSS (for the menu icon) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,300&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #6a1b9a; /* Purple */
+            --secondary-color: #ff4081; /* Pink */
+            --light-background: #f3e5f5; /* Light Pink */
+            --text-color: #4a148c; /* Dark Purple */
+            --white: #fff;
+            --border-color: #f8bbd0; /* Light Pink */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-background);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.5rem 1rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            transition: all 0.5s ease;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: color 1s ease-in-out;
+            animation: logoGlow 3s infinite alternate;
+            margin-left: 40px;
+        }
+
+        @keyframes logoGlow {
+            0%,
+            100% {
+                color: var(--secondary-color);
+                text-shadow: 0 0 10px var(--secondary-color);
+            }
+
+            50% {
+                color: var(--white);
+                text-shadow: 0 0 20px var(--secondary-color);
+            }
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        ul li {
+            margin: 0 1.25rem;
+            cursor: pointer;
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 2rem auto;
+            padding: 1rem;
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            animation: fadeIn 2s forwards;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            table-layout: fixed;
+            border: 1px solid var(--border-color);
+        }
+
+        th,
+        td {
+            border: 1px solid var(--border-color);
+            padding: 0.75rem;
+            text-align: center;
+            word-wrap: break-word;
+        }
+
+        th {
+            background-color: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+        }
+
+        .btnsm {
+            padding: 0.25rem 0.5rem;
+            font-size: 0.875rem;
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+            border: none;
+            border-radius: 0.3rem;
+            margin: 0.5rem 0;
+            cursor: pointer;
+        }
+
+        .btnsm:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+            border: none;
+            border-radius: 0.3rem;
+            margin: 1rem 0;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+        }
+
+        #alert {
+            display: none;
+            padding: 0.625rem;
+            background: #ff4b5c;
+            color: var(--white);
+            border-radius: 0.3rem;
+            text-align: center;
+            margin-top: 1rem;
+        }
+
+        /* Media query for screens smaller than 500px */
+        @media (max-width: 500px) {
+            .navbar-nav {
+                display: none;
+            }
+
+            .navbar-toggler {
+                display: block;
+            }
+
+            .navbar-collapse.show .navbar-nav {
+                display: flex;
+            }
+
+            .logo {
+                text-align: center;
+                flex-grow: 1;
+            }
+
+            .navbar-toggler {
+                margin-left: auto;
+            }
+        }
+
+        /* Add this to ensure the navbar items are displayed on larger screens */
+        @media (min-width: 501px) {
+            .navbar-nav {
+                display: flex;
+            }
+
+            .navbar-toggler {
+                display: none; /* Hide hamburger menu on larger screens */
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="logo">PassVault</div>
+        <!-- Hamburger menu icon -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./contact.html">Contact</a>
+                </li>
+                <li class="nav-item">
+                    <!-- Sign Out Button -->
+                    <button id="signoutBtn" class="btn btn-sm">Sign Out</button>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Password Manager</h1>
+        <p>We're thrilled to have you here. Your digital life contains a myriad of passwords, and we know how challenging it can be to manage them all. That's why we're here to make it easy for you.</p>
+        <br>
+        <h2>Your Passwords <span id="alert">(Copied!)</span></h2>
+        <table id="passwordTable">
+            <tr>
+                <th>Website</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Actions</th>
+            </tr>
+        </table>
+        <br>
+        <h2>Add a Password</h2>
+        <form id="passwordForm">
+            <label for="website">Website:</label><br>
+            <input type="text" id="website" name="website" required><br><br>
+
+            <label for="username">Username:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Password:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <button type="submit" class="btn">Save Password</button>
+        </form>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('passwordForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const website = document.getElementById('website').value;
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            // Add the password entry to the table
+            const table = document.getElementById('passwordTable');
+            const row = table.insertRow();
+
+            const websiteCell = row.insertCell(0);
+            const usernameCell = row.insertCell(1);
+            const passwordCell = row.insertCell(2);
+            const actionsCell = row.insertCell(3);
+
+            websiteCell.innerText = website;
+            usernameCell.innerText = username;
+            passwordCell.innerText = '••••••••'; // Masked password
+
+            // Add copy button
+            const copyBtn = document.createElement('span');
+            copyBtn.className = 'copy-btn';
+            copyBtn.innerHTML = '📋';
+            copyBtn.addEventListener('click', function () {
+                navigator.clipboard.writeText(password).then(() => {
+                    document.getElementById('alert').style.display = 'block';
+                    setTimeout(() => {
+                        document.getElementById('alert').style.display = 'none';
+                    }, 1500);
+                });
+            });
+
+            // Add delete button
+            const deleteBtn = document.createElement('span');
+            deleteBtn.className = 'delete-btn';
+            deleteBtn.innerHTML = '❌';
+            deleteBtn.addEventListener('click', function () {
+                row.remove();
+            });
+
+            actionsCell.appendChild(copyBtn);
+            actionsCell.appendChild(deleteBtn);
+
+            // Save the password entry to localStorage
+            savePasswordsToLocalStorage();
+
+            // Reset the form fields
+            document.getElementById('passwordForm').reset();
+        });
+
+        // Sign out function
+        document.getElementById('signoutBtn').addEventListener('click', function () {
+            // Clear local storage
+            localStorage.clear();
+
+            // Redirect to the homepage (or login page)
+            window.location.href = './homepage.html';  // Assuming homepage is index.html
+
+            // Show pop-up (optional)
+            alert("You have signed out successfully!");
+        });
+
+        // Function to save passwords to localStorage
+        function savePasswordsToLocalStorage() {
+            const table = document.getElementById('passwordTable');
+            const passwords = [];
+            for (let i = 1; i < table.rows.length; i++) {
+                const row = table.rows[i];
+                const website = row.cells[0].innerText;
+                const username = row.cells[1].innerText;
+                const password = row.cells[2].innerText;
+                passwords.push({ website, username, password });
+            }
+            localStorage.setItem('passwords', JSON.stringify(passwords));
+        }
+
+        // Load passwords from localStorage
+        window.onload = function () {
+            const savedPasswords = JSON.parse(localStorage.getItem('passwords'));
+            if (savedPasswords) {
+                const table = document.getElementById('passwordTable');
+                savedPasswords.forEach((passwordData) => {
+                    const row = table.insertRow();
+                    row.insertCell(0).innerText = passwordData.website;
+                    row.insertCell(1).innerText = passwordData.username;
+                    row.insertCell(2).innerText = '••••••••';  // Masked password
+                    const actionsCell = row.insertCell(3);
+                    const copyBtn = document.createElement('span');
+                    copyBtn.innerHTML = '📋';
+                    copyBtn.className = 'copy-btn';
+                    actionsCell.appendChild(copyBtn);
+                    const deleteBtn = document.createElement('span');
+                    deleteBtn.innerHTML = '❌';
+                    deleteBtn.className = 'delete-btn';
+                    actionsCell.appendChild(deleteBtn);
+                });
+            }
+        }
+    </script>
+
+    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" defer></script>
+</body>
+
+</html>

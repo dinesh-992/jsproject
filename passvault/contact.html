@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact - PassVault</title>
+
+    <!-- Bootstrap CSS (for the menu icon) -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,400;0,700;1,300&family=Poppins:wght@300;400;600&display=swap');
+
+        :root {
+            --primary-color: #6a1b9a; /* Purple */
+            --secondary-color: #ff4081; /* Pink */
+            --light-background: #f3e5f5; /* Light Pink */
+            --text-color: #4a148c; /* Dark Purple */
+            --white: #fff;
+            --border-color: #f8bbd0; /* Light Pink */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html, body {
+            height: 100%; /* Ensure the body and html take full height of the viewport */
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--light-background);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column; /* Align content in a column */
+        }
+
+        /* Sticky Navbar */
+        nav {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 0.5rem 2rem; /* Added padding to both sides of the nav */
+            position: sticky;
+            top: 0;
+            z-index: 1000; /* Ensures it stays on top of other elements */
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar {
+            position: fixed;
+            display: flex;
+            justify-content: space-between; /* Aligns logo to the left and menu to the right */
+            align-items: center;
+            width: 100%; /* Ensures navbar takes up full width */
+        }
+
+        .logo {
+            font-family: 'Noto Sans', sans-serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--white);
+        }
+
+        ul {
+            display: flex;
+            align-items: center;
+            list-style: none;
+        }
+
+        ul li {
+            margin: 0 1.25rem;
+            cursor: pointer;
+            transition: color 0.5s ease-in-out, transform 0.3s ease;
+        }
+
+        ul li:hover {
+            color: var(--secondary-color);
+            transform: scale(1.1);
+        }
+
+        .navbar-toggler {
+            border: none; /* Hide the border of the hamburger menu */
+        }
+
+        .container {
+            max-width: 90%;
+            margin: 3rem auto;
+            padding: 2rem 1rem 1rem 1rem; /* Added padding-top for extra space */
+            background: var(--white);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            border-radius: 0.5rem;
+            flex: 1; /* This will allow the container to grow and take available space */
+        }
+
+        h1, h2 {
+            color: var(--primary-color);
+            font-weight: 700;
+        }
+
+        .form-control, .btn {
+            margin-bottom: 1rem;
+        }
+
+        .btn {
+            padding: 0.625rem 1.25rem;
+            background: var(--primary-color);
+            color: var(--white);
+            font-weight: 600;
+            border: none;
+            border-radius: 0.3rem;
+            margin-top: 1rem;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background: var(--white);
+            color: var(--primary-color);
+            border: 1px solid var(--primary-color);
+            transform: scale(1.1);
+        }
+
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 1rem 0;
+            text-align: center;
+            margin-top: 2rem;
+            width: 100%;
+            position: relative;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+        <div class="logo" style="margin-left: 7%;">PassVault</div>
+
+        <!-- Hamburger menu icon -->
+        <button class="navbar-toggler" style="margin-right: 30px;" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto me-3"> <!-- Added "me-3" for some space on the right -->
+                <li class="nav-item">
+                    <a class="nav-link" href="./mainpage.html">Vault</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">About</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p class="contact-info">
+            PassVault is a password manager that helps you securely store and manage your passwords. 
+            Our mission is to make your digital life safer and more convenient by offering a simple 
+            yet secure platform for managing your sensitive data. 
+        </p>
+        <p class="contact-info">
+            We are continuously working to improve PassVault, and your feedback plays a crucial role 
+            in our development process. Whether you've encountered a bug or have a suggestion for a new feature, 
+            we are eager to hear from you!
+        </p>
+        
+        <h2>Bug Fixes & Development Suggestions</h2>
+        <p>
+            If you encounter any bugs or have suggestions for improving PassVault, please feel free to contact us. 
+            Your feedback is vital to help us improve the website and provide you with a better experience.
+        </p>
+        <p>
+            For bug fixes or development suggestions, please send an email to 
+            <a href="mailto:dineshtallam2@gmail.com">dineshtallam2@gmail.com</a>.
+        </p>
+
+        <h3>Why Your Feedback Matters</h3>
+        <p>
+            We strive to make PassVault a reliable and user-friendly tool. By submitting your feedback, you help us 
+            identify potential issues and prioritize new features that can enhance your experience. 
+            No matter how small the bug or idea, your input can make a difference in shaping the future of PassVault.
+        </p>
+        <p>
+            Your suggestions may lead to new features that could improve usability, enhance security, or provide more 
+            customization options. We are committed to creating a tool that you can trust, and we greatly appreciate 
+            your support in making it even better.
+        </p>
+    </div>
+
+    <footer>
+        <p>PassVault &copy; 2024</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

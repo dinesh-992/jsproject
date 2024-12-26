@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PassVault - Your Secure Digital Locker</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* Keyframes for fade-in and slide-in animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInLeft {
+            from {
+                transform: translateX(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        @keyframes slideInRight {
+            from {
+                transform: translateX(50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        :root {
+            --primary-color: #6a1b9a;
+            --secondary-color: #ff4081;
+            --background-color: #f3e5f5;
+            --white: #fff;
+            --text-color: #4a148c;
+            --border-color: #f8bbd0;
+            --hover-color: #f50057;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar - Only Logo */
+        .nav-bar {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 20px; /* Reduced padding for a smaller header height */
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-bar .brand {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: var(--white);
+            text-shadow: 0 0 15px red;
+            transition: text-shadow 0.3s ease-in-out;
+        }
+
+        .nav-bar .brand:hover {
+            text-shadow: 0 0 25px red, 0 0 50px red;
+        }
+
+        /* Hero Section */
+        .hero-section {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #6a1b9a, #ff4081);
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-section h1 {
+            font-size: 4rem;
+            font-weight: 700;
+            color: var(--white);
+            text-shadow: 3px 3px 10px rgba(0, 0, 0, 0.4);
+            margin-bottom: 20px;
+            animation: slideInUp 1.5s ease-out;
+        }
+
+        .hero-section p {
+            font-size: 1.5rem;
+            color: var(--white);
+            margin-bottom: 30px;
+            max-width: 800px;
+            text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+            line-height: 1.7;
+            animation: slideInUp 2s ease-out;
+        }
+
+        .hero-btn {
+            background-color: var(--secondary-color);
+            padding: 15px 30px;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--white);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: transform 0.3s ease, background-color 0.3s ease;
+            animation: slideInUp 2.5s ease-out;
+        }
+
+        .hero-btn:hover {
+            transform: scale(1.1);
+            background-color: #f50057;
+        }
+
+        /* Modules Section */
+        .modules-section {
+            padding: 60px 20px;
+            background-color: var(--white);
+            color: var(--text-color);
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        .modules-section h2 {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            animation: slideInLeft 2s ease-out;
+        }
+
+        .modules-section p {
+            font-size: 1.1rem;
+            margin-bottom: 40px;
+            line-height: 1.8;
+            max-width: 750px;
+            margin: 0 auto;
+            animation: slideInRight 2s ease-out;
+        }
+
+        .module-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .module-card {
+            background-color: var(--white);
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            padding: 25px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            opacity: 0;
+            animation: slideInUp 2.5s ease-out forwards;
+        }
+
+        .module-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        }
+
+        .module-card i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .module-card h3 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            margin-bottom: 15px;
+        }
+
+        .module-card p {
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        /* Footer Section */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+            animation: fadeIn 2s ease-out;
+        }
+
+        footer p {
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+
+        footer a {
+            color: var(--white);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            margin: 0 10px;
+            font-size: 1.3rem;
+        }
+
+        /* Media Queries for Phone-Sized Screens */
+        @media screen and (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 3rem;
+            }
+
+            .hero-section p {
+                font-size: 1.2rem;
+                max-width: 600px;
+            }
+
+            .hero-btn {
+                padding: 12px 25px;
+                font-size: 1rem;
+            }
+
+            .modules-section h2 {
+                font-size: 2rem;
+            }
+
+            .modules-section p {
+                font-size: 1rem;
+            }
+
+            .module-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .module-card {
+                padding: 15px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media screen and (max-width: 480px) {
+            .hero-section h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-section p {
+                font-size: 1rem;
+                max-width: 500px;
+            }
+
+            .hero-btn {
+                padding: 10px 20px;
+                font-size: 0.9rem;
+            }
+
+            .module-card {
+                padding: 12px;
+            }
+
+            footer p {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation Bar with only Logo -->
+    <div class="nav-bar">
+        <div class="brand">PassVault</div>
+    </div>
+
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <h1>Welcome to PassVault</h1>
+        <p>Your personal, encrypted vault for storing and securing passwords. Make your digital life safer and simpler with PassVault.</p>
+        <a style="text-decoration: none;" href="./login.html" class="hero-btn">Get Started</a>
+    </section>
+
+    <!-- Modules Section -->
+    <section class="modules-section">
+        <h2>Key Features</h2>
+        <p>PassVault offers simple and secure password storage with user verification. Here are the core features:</p>
+
+        <div class="module-cards">
+            <!-- Module 1: Secure Password Storage -->
+            <div class="module-card">
+                <i class="fas fa-lock"></i>
+                <h3>Secure Password Storage</h3>
+                <p>Store all your passwords securely in one place with encryption, keeping them safe from unauthorized access.</p>
+            </div>
+            <!-- Module 2: User Authentication -->
+            <div class="module-card">
+                <i class="fas fa-user-check"></i>
+                <h3>User Authentication</h3>
+                <p>Ensure that only you can access your passwords with user verification method</p>
+            </div>
+            <!-- Module 3: Easy Access & Management -->
+            <div class="module-card">
+                <i class="fas fa-clipboard-list"></i>
+                <h3>Easy Access & Management</h3>
+                <p>Effortlessly manage and retrieve your stored passwords across different devices with a simple and user-friendly interface.</p>
+            </div>
+            <!-- Module 4: Automatic Syncing -->
+            <div class="module-card">
+                <i class="fas fa-sync-alt"></i>
+                <h3>Hides Password</h3>
+                <p>When a user fills in the password, display it as asterisks (*) by default when saved, and allow them to toggle the visibility if needed.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <p>© 2024 PassVault. All rights reserved.</p>
+      
+    </footer>
+</body>
+
+</html>

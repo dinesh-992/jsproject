@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>passVault - Sign Up</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #6a1b9a;
+            --secondary-color: #ff4081;
+            --background-color: #f3e5f5;
+            --white: #fff;
+            --text-color: #4a148c;
+            --border-color: #f8bbd0;
+            --hover-color: #f50057;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.6;
+        }
+
+        /* Navigation Bar */
+        .nav-bar {
+            background-color: var(--primary-color);
+            color: var(--white);
+            padding: 10px 40px; /* Reduced padding to decrease header height */
+            display: flex;
+            justify-content: center; /* Center brand name */
+            align-items: center;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .nav-bar .brand {
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        /* Form Section */
+        .form-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 80vh; /* Decreased height */
+            background: var(--background-color);
+            padding: 0 20px;
+            margin-top: 120px; /* Increased margin for more gap between header and form */
+        }
+
+        .form-container {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 1rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .form-container label {
+            font-size: 1rem;
+            color: var(--text-color);
+            margin-bottom: 8px;
+            display: block;
+            text-align: left;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            color: var(--text-color);
+            background-color: #f8f1f8;
+        }
+
+        .form-container input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            background-color: #fff;
+        }
+
+        .form-container button {
+            width: 100%;
+            background-color: var(--secondary-color);
+            padding: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--white);
+            border: none;
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #f50057;
+        }
+
+        .form-container .form-footer {
+            margin-top: 20px;
+            font-size: 1rem;
+            color: var(--text-color);
+        }
+
+        .form-container .form-footer a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .form-container .form-footer a:hover {
+            color: var(--secondary-color);
+        }
+
+        /* Password Strength Suggestion */
+        .password-suggestion {
+            font-size: 0.9rem;
+            color: #f50057;
+            margin-top: -10px;
+            text-align: left;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <div class="nav-bar">
+        <div class="brand">passVault</div>
+    </div>
+
+    <!-- Signup Form Section -->
+    <section class="form-section">
+        <div class="form-container">
+            <h2>Create an Account</h2>
+            <form action="#" id="signup-form">
+                <label for="username">Username</label>
+                <input type="text" id="username" placeholder="Enter your username" required>
+
+                <label for="new-email">Email Address</label>
+                <input type="email" id="email" placeholder="Enter your email" required>
+
+                <label for="new-password">Password</label>
+                <input type="password" id="password" placeholder="Enter your password" required>
+
+                <button type="submit" id="signup">Sign Up</button>
+            </form>
+            <div class="form-footer">
+                <p>Already have an account? <a href="./login.html">Login</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Section -->
+    <footer>
+        <center><p>&copy; 2024 passVault</p></center>
+    </footer>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-app.js";
+        import { getDatabase,set,ref } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-database.js";
+        import { getAuth, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/11.1.0/firebase-auth.js";
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBNmz6MVBcJTFXZe3NDheal03P9wbX3jCs",
+          authDomain: "authentication-app-5e2ec.firebaseapp.com",
+          databaseURL: "https://authentication-app-5e2ec-default-rtdb.firebaseio.com",
+          projectId: "authentication-app-5e2ec",
+          storageBucket: "authentication-app-5e2ec.firebasestorage.app",
+          messagingSenderId: "727517364398",
+          appId: "1:727517364398:web:b7cb8bd3b8814b08caed3f"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        const database = getDatabase(app);
+        const auth = getAuth();
+
+        // Handle form submit
+        const signupForm = document.getElementById('signup-form');
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault(); // Prevent form submission
+
+            var email = document.getElementById('email').value;
+            var password = document.getElementById('password').value;
+            var username = document.getElementById('username').value;
+
+            // Firebase sign-up logic
+            createUserWithEmailAndPassword(auth, email, password)
+                .then((userCredential) => {
+                    const user = userCredential.user;
+                    set(ref(database,'users/'+ user.uid),{
+                        username: username,
+                        email:email
+                        
+                    })
+                    alert('User created successfully!');
+                    // You can also save additional data like username to your database here
+                })
+                .catch((error) => {
+                    const errorCode = error.code;
+                    const errorMessage = error.message;
+                    alert(errorMessage); // Show actual error message
+                });
+        });
+    </script>
+
+</body>
+
+</html>
